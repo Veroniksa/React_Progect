@@ -2,6 +2,7 @@
     text-align: center;
     color: blueviolet;
     background-color: azure;
+
 }
 
 .MessageListForm{
@@ -15,10 +16,17 @@
 }
 
 .MessageListBTN{
+    padding: 0;
     border-radius: 20%;
     border: 1px solid azure;
     background: aquamarine;
     margin-left: 10px;
     color: blueviolet;
     cursor: pointer;
+}
+
+.listItem{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
 }
