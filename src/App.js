@@ -33,7 +33,7 @@ const requestBot = [
   {id:3, text: "Jast Do It"}
 ];
 
-const mess = {text:"", author:"bot"};
+const mess = {text:"", author:"human"};
 
 function App() {
 
@@ -53,16 +53,22 @@ function App() {
   const[messageAdd, setMessageAdd] = useState(mess);
 
   useEffect(()=> {
-   if(messagesList.length){
+   if(messagesList.length && messagesList[messagesList.length - 1].author !== "robot"){
      const ansver = {text: "Hello", author: "robot"};
-     if(messagesList[messagesList.length - 1].author !== "robot"){
-      setTimeout(()=>{
+      const timer = setTimeout(()=>{
         setMessagesList([...messagesList, ansver]);
-      }, 1000);
-     }
+      }, 1000); 
      inputRef.current.focus();
+     return () => clearTimeout(timer);
    }
   },[messagesList]);
+
+/*   useEffect(()=> {
+    return() => {
+      console.log("will unmount")
+      clearTimeout(timer);
+    }
+  },[]) */
 
 /* 
   const handelAddMessage = () => {
@@ -78,10 +84,11 @@ function App() {
   const handelSubmit = (e) => {
     e.preventDefault();
     setMessagesList([...messagesList, messageAdd]);
-    setMessageAdd("");
     inputRef.current.focus();
   };
 
+  
+  
   return (
     <div className="MessageList">
       {/* <div onClick={toggleCounter}>Toggle Counter</div> */}
@@ -95,7 +102,7 @@ function App() {
         label="Message"
         inputRef={inputRef} 
         className="MessageListInput" 
-        value={messageAdd.text} 
+        value={messageAdd.text}
         onChange={handelChange}/>
         <Button 
         variant="outlined" 
