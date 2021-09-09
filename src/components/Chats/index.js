@@ -3,65 +3,62 @@ import { useEffect, useState, useCallback } from 'react';
 import {MessageList} from '../MessageList';
 import '../MessageList/MessageList.css';
 
-import {ThemeProvider} from '@material-ui/core/styles';
-import { createTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import purple from '@material-ui/core/colors/purple';
-
-import { AUTHORS } from '../utils';
+import { AUTHORS } from '../utils/constans';
 import { Form } from '../Form';
 import { ChartList } from '../ChstList';
 import { ButtonTop } from '../ButtonTop';
+import { useParams } from "react-router";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: purple[400],
-    },
-    secondary: {
-      main: blue[500],
-    },
-  },
-});
+
+const initialMessages = {
+  'Leonardo-1': [
+    {text: "Ciao", author: "HUMAN", id: "mess-2"},
+    {text: "Come va?", author: "HUMAN", id: "mess-1"}
+  ],
+  'Alieno-2': [
+    {text: "Pizza", author: "HUMAN", id: "mess-3"},
+    {text: "Ti va?", author: "HUMAN", id: "mess-4"}
+  ],
+  'Maria-3': []
+};
 
 const list = [
   {name: "Leonardo",
-   id: "1"},
+   id: "Leonardo-1"},
    {name: "Alieno",
-   id: "2"},
+   id: "Alieno-2"},
    {name: "Maria",
-   id: "3"},
+   id: "Maria-3"},
 ];
 
-
-/* const requestBot = [
-  {id:1, text: "I am stupid bot"},
-  {id:2, text: "Next"},
-  {id:3, text: "Jast Do It"}
-];
- */
-
-const mess = {text:"", author: AUTHORS.HUMAN};
+/* const mess = {text:"", author: AUTHORS.HUMAN}; */
 
 function Chats() {
 
-  const [items, setItems] = useState([
-    {name: "Leonardo",
-     id: "1"},
-     {name: "Aiello",
-     id: "2"},
-     {name: "Maria",
-     id: "3"},
-  ]);
+  const {itemId} = useParams();
 
-  const [messagesList, setMessagesList] = useState([]);
+  const [items, setItems] = useState(list);
+
+  const [messagesList, setMessagesList] = useState(initialMessages);
+
+  const sendMessage = useCallback((messagesList) => {
+    setMessagesList((prevMessage) => ({
+      ...prevMessage,
+      [itemId]:[...prevMessage[itemId], messagesList]
+  }));
+  }, [itemId]);
 
   useEffect(()=> {
-   if(messagesList.length && messagesList[messagesList.length - 1].author !== AUTHORS.HUMAN){
-     const ansver = {text: "Hello", author: AUTHORS.bot};
-      const timer = setTimeout(()=>{
-        setMessagesList([...messagesList, ansver]);
-      }, 1000); 
+    let timer;
+    const curMess = messagesList[itemId];
+   if(!!itemId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN){
+      timer = setTimeout(()=>{
+        sendMessage({
+        text: "Hello", 
+        author: AUTHORS.bot,
+        id: `mess-${Date.now()}`
+      });
+      }, 2000); 
      return () => clearTimeout(timer);
    }
   },[messagesList]);
@@ -69,26 +66,34 @@ function Chats() {
 
   const handelAddMessage = useCallback(
     (text) => {
-      setMessagesList((prevMess) => [
-        ...prevMess, 
+      sendMessage(
         {
           text,
           author: AUTHORS.HUMAN,
           id: `mess-${Date.now()}` ,
         }
+      );
+  },[itemId, sendMessage]); 
+
+/*   const handelAddMessage = useCallback(
+    ({text: text}) => {
+      setMessagesList((prevMessage) => [
+        ...prevMessage, 
+        text
       ]);
-  },[]);
+  },[]); */
   
   return (
-    <ThemeProvider theme={theme}>
     <div className="MessageList">
       <ChartList items={items}/>
-      <Form onSubmit={handelAddMessage}/>
-      {messagesList.map((message, i) => ( 
-      <MessageList key={i} text = {message.text} />))}
-    </div>
-    <ButtonTop>Add Massage</ButtonTop>
-    </ThemeProvider>
+        {!!itemId && (
+          <>
+            <Form onSubmit={handelAddMessage} />
+            {messagesList[itemId].map((message, i) => ( 
+            <MessageList key={i} text = {message.text} />))}
+            </>
+        )}
+      </div>       
   );
 }
 

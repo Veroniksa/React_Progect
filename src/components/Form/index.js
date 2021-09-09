@@ -1,21 +1,20 @@
 import React from 'react';
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { FormControl } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 
-import { AUTHORS } from '../utils';
-
-const mess = {text:"", author: AUTHORS.HUMAN};
+import { AUTHORS } from '../utils/constans';
 
 export const Form = ({onSubmit}) => {
+
   const inputRef = useRef(null);
 
-  const[messageAdd, setMessageAdd] = useState(mess);
+  const[messageAdd, setMessageAdd] = useState("");
 
 
   const handelChange = useCallback((event) => {
-    setMessageAdd({...messageAdd, text: event.target.value});
+    setMessageAdd(event.target.value);
   },[]);
 
 
@@ -25,7 +24,6 @@ export const Form = ({onSubmit}) => {
 
     inputRef.current.focus();
   };
-
 
   return (
     <FormControl 

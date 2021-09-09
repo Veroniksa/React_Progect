@@ -1,8 +1,9 @@
+body{
+    background-color: azure;
+}
 .MessageList{
     text-align: center;
     color: blueviolet;
-    background-color: azure;
-
 }
 
 .MessageListForm{

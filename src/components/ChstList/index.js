@@ -1,5 +1,6 @@
 import { List, ListItem } from "@material-ui/core";
 import React from "react";
+import { Link } from "react-router-dom";
 import { ButtonTop } from "../ButtonTop";
 
 export const ChartList = ({ items }) => {
@@ -8,7 +9,7 @@ export const ChartList = ({ items }) => {
         {items.map((item) => (
           <ListItem 
           key={item.id} 
-          className="item">{item.name}</ListItem>
+          className="item"><Link to={`/chats/${item.id}`}>{item.name}</Link></ListItem>
         ))}
         <ButtonTop>Add Chat</ButtonTop>
       </List>
