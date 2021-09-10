@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from '../Home';
 import Chats from "../Chats/";
 import { Profile } from "../Profile";
+import { Nochats } from "../Nochats";
 
 
 
@@ -21,15 +22,19 @@ export const Routes = () => {
                 </li>
             </ul>
         </div>
+
           <Switch>
             <Route path="/profile">
                 <Profile />
             </Route>
-            <Route path="/:chats/:(/\D+\w+\s/g)?">
+{/*             <Route path="/chats/:(/\d+)?">
+                <Chats />
+            </Route> */}
+            <Route static path="/chats/:itemId?">
                 <Chats />
             </Route>
-            <Route static path="/:chats/:itemId?">
-                <Chats />
+            <Route path="/nochats">
+                <Nochats />
             </Route>
             <Route path="/" exact>
                 <Home />

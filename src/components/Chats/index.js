@@ -1,5 +1,7 @@
+
+import {useEffect, useState, useCallback } from 'react';
+import { Redirect, useParams } from "react-router";
 import "../Message.css";
-import { useEffect, useState, useCallback } from 'react';
 import {MessageList} from '../MessageList';
 import '../MessageList/MessageList.css';
 
@@ -7,7 +9,6 @@ import { AUTHORS } from '../utils/constans';
 import { Form } from '../Form';
 import { ChartList } from '../ChstList';
 import { ButtonTop } from '../ButtonTop';
-import { useParams } from "react-router";
 
 
 const initialMessages = {
@@ -51,6 +52,7 @@ function Chats() {
   useEffect(()=> {
     let timer;
     const curMess = messagesList[itemId];
+
    if(!!itemId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN){
       timer = setTimeout(()=>{
         sendMessage({
@@ -59,8 +61,8 @@ function Chats() {
         id: `mess-${Date.now()}`
       });
       }, 2000); 
-     return () => clearTimeout(timer);
    }
+    return () => clearTimeout(timer);
   },[messagesList]);
 
 
@@ -82,6 +84,10 @@ function Chats() {
         text
       ]);
   },[]); */
+
+/*   if(!items[itemId]){
+    return (<Redirect to="nochats"/>)
+  } */
   
   return (
     <div className="MessageList">
@@ -90,7 +96,7 @@ function Chats() {
           <>
             <Form onSubmit={handelAddMessage} />
             {messagesList[itemId].map((message, i) => ( 
-            <MessageList key={i} text = {message.text} />))}
+            <MessageList key={message.id} text = {message.text} />))}
             </>
         )}
       </div>       
