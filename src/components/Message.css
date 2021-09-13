@@ -1,4 +1,5 @@
 .Message{
     text-align: right;
     color: red;
+    margin: 10px;
 }
