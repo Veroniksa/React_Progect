@@ -34,7 +34,7 @@ const withContext = (Component) => {//Дикоратор
       <button onClick={theme.changeTheme}>Toggle theme</button>
       <button onClick={handelClick}>Toggle show name</button>
       {showName && <div>Show name is true</div>}
-      <Checkbox checked={true} onChange={onChange}></Checkbox>
+      <Checkbox value={checkBox} onChange={onChange}></Checkbox>
       {checkBox && <div>Check box is on</div>}
 
       </>

@@ -3,7 +3,7 @@ import { CHECK_BOX, TOOGLE_SHOW_NAME } from "./action";
 
 const initialState = {
     showName: false,
-    checkBox: true,
+    checkBox: false,
 };
 
 export const profileReducer = (state = initialState, action) => {
