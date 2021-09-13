@@ -1,7 +1,9 @@
+import { useCallback, useState } from 'react';
+import {Provider} from 'react-redux';
 import { Routes } from './components/Routes';
 import './App.css';
 import { ThemeContext } from './components/utils/ThemeContext';
-import { useCallback, useState } from 'react';
+import { store } from './store';
   
 function App() {
 
@@ -12,9 +14,11 @@ function App() {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{theme, changeTheme}}>
-      <Routes />
-    </ThemeContext.Provider>
+    <Provider store={store}>
+      <ThemeContext.Provider value={{theme, changeTheme}}>
+        <Routes />
+      </ThemeContext.Provider>
+    </Provider>
   );
 }
 

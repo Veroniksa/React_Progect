@@ -1,8 +1,10 @@
-import { TOOGLE_SHOW_NAME } from "./action"
+import { Nochats } from "../../components/Nochats";
+import { CHECK_BOX, TOOGLE_SHOW_NAME } from "./action";
 
 const initialState = {
-    showName: false
-}
+    showName: false,
+    checkBox: true,
+};
 
 export const profileReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -10,9 +12,15 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 showName: !state.showName
-            }
+            };
+        }
+        case CHECK_BOX: {
+            return {
+                ...state,
+                checkBox: !state.checkBox
+            };
         }
         default:
-            return state
+            return state;
     } 
-}
+};
