@@ -92,7 +92,7 @@ function Chats() {
   return (
     <div className="MessageList">
       <ChartList items={items}/>
-        {!!itemId && (
+        {!!itemId && !!messagesList[itemId]  && (
           <>
             <Form onSubmit={handelAddMessage} />
             {messagesList[itemId].map((message, i) => ( 
