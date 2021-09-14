@@ -1,12 +1,13 @@
-import { CHECK_BOX, TOOGLE_SHOW_NAME } from "./action";
+import { CHANGE_NAME, CHECK_BOX, TOOGLE_SHOW_NAME } from "./action";
 
 const initialState = {
     showName: false,
     checkBox: false,
+    name: "default"
 };
 
-export const profileReducer = (state = initialState, action) => {
-    switch(action.type) {
+export const profileReducer = (state = initialState, {type, payload}) => { //{type, payload} деструктаризация action
+    switch(type) {
         case TOOGLE_SHOW_NAME: {
             return {
                 ...state,
@@ -17,6 +18,12 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 checkBox: !state.checkBox
+            };
+        }
+        case CHANGE_NAME: {
+            return {
+                ...state,
+                name: payload,
             };
         }
         default:

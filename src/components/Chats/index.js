@@ -1,6 +1,7 @@
 
 import {useEffect, useState, useCallback } from 'react';
-import { Redirect, useParams } from "react-router";
+import { useParams } from "react-router";
+import {useHistory} from 'react-router-dom';
 import "../Message.css";
 import {MessageList} from '../MessageList';
 import '../MessageList/MessageList.css';
@@ -8,7 +9,9 @@ import '../MessageList/MessageList.css';
 import { AUTHORS } from '../utils/constans';
 import { Form } from '../Form';
 import { ChartList } from '../ChstList';
-import { ButtonTop } from '../ButtonTop';
+import { useSelector, useDispatch } from 'react-redux';
+
+import {addChat, deleteChat} from '../../store/chats/actions'
 
 
 const initialMessages = {
@@ -34,9 +37,14 @@ const list = [
 
 function Chats() {
 
+  const history = useHistory();
+
   const {itemId} = useParams();
 
-  const [items, setItems] = useState(list);
+  const dispatch = useDispatch();
+
+  //const [items, setItems] = useState(list);
+  const items = useSelector[state => state.items.items];
 
   const [messagesList, setMessagesList] = useState(initialMessages);
 
@@ -75,44 +83,49 @@ function Chats() {
   },[itemId, sendMessage]);
   
   const handelAddChats = useCallback((name)=> {
-    const id = `chat-${Date.now()}`;
-    setItems((prevItems) => [
-      ...prevItems, 
-      {
-        id ,
-        name,
-      }
-    ]);
+    dispatch(addChat(name));
 
-    setMessagesList((prevMessage) => ({
+/*     setMessagesList((prevMessage) => ({
       ...prevMessage,
       [id]:[]
-    }));
+    })); */
   }, []);
 
   const handelDeleteChat = useCallback((id) => {
+    dispatch(deleteChat(id));
     const newChats = items.filter(item => item.id !== id);
 
-    setItems(newChats);
+    //setItems(newChats);
 
     const newMess = {...messagesList};
     delete newMess[id];
 
     setMessagesList(newMess);
-  },[items, messagesList]);
+
+    if(itemId !== id) {
+      return;
+    }
+
+    if(items.length === 1) {
+      history.push(`/chats/${items[0].id}`);
+    } else {
+      history.push(`/chats`);
+    }
+
+  },[items, messagesList, itemId, dispatch]);
   
   return (
     <div className="MessageList">
       <ChartList items={items} 
       onAddChat={handelAddChats} 
       onDeleteChat={handelDeleteChat}/>
-        {!!itemId && !!messagesList[itemId]  && (
+        {/* {!!itemId && !!messagesList[itemId]  && (
           <>
             <Form onSubmit={handelAddMessage} />
             {messagesList[itemId].map((message, i) => ( 
             <MessageList key={message.id} text = {message.text} />))}
             </>
-        )}
+        )} */}
       </div>       
   );
 }

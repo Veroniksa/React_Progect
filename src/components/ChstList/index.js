@@ -1,22 +1,11 @@
-import { List } from "@material-ui/core";
 import React from "react";
-import { useState } from "react";
+import { List } from "@material-ui/core";
 import { ChatItem } from "../ChatItem";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { FormAddChat } from "../FormAddChat";
 
 
 export const ChartList = ({ items, onDeleteChat, onAddChat }) => {
-  const [value, setValue] = useState('');
 
-  const handelChange = (e) => {
-      setValue(e.target.value);
-  };
-
-  const handelSubmit = (e) => {
-      e.preventDefault();
-      onAddChat(value);
-  };
     return (
       <>
       <List> 
@@ -26,21 +15,7 @@ export const ChartList = ({ items, onDeleteChat, onAddChat }) => {
           id={item.id} 
           onDelete={onDeleteChat}/>
         ))}
-        <form onSubmit={handelSubmit}>
-          <TextField
-            autoFocus
-            value={value}
-            label="New chat"
-            type="text"
-            onChange={handelChange}
-            />
-            <Button 
-            variant="outlined" 
-            disabled={!value} 
-            onClick={handelSubmit}
-            >Add Chat
-            </Button>
-         </form>
+        <FormAddChat onAddChat={onAddChat} />
       </List>
       </>
     );
