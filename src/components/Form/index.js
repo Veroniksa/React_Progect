@@ -4,7 +4,6 @@ import { FormControl } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 
-import { AUTHORS } from '../utils/constans';
 
 export const Form = ({onSubmit}) => {
 
@@ -12,11 +11,9 @@ export const Form = ({onSubmit}) => {
 
   const[messageAdd, setMessageAdd] = useState("");
 
-
   const handelChange = useCallback((event) => {
     setMessageAdd(event.target.value);
   },[]);
-
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +33,7 @@ export const Form = ({onSubmit}) => {
       value={messageAdd.text}
       onChange={handelChange}/>
       <Button 
+      type="submit"
       variant="outlined" 
       size="small" 
       onClick={handelSubmit} 

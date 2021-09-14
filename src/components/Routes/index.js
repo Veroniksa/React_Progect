@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Home } from '../Home';
 import Chats from "../Chats/";
 import { Profile, ThemeProfile } from "../Profile";
-import { Nochats } from "../Nochats";
 
 
 
@@ -29,9 +28,6 @@ export const Routes = () => {
             </Route>
             <Route static path="/chats/:itemId?">
                 <Chats />
-            </Route>
-            <Route path="/nochats">
-                <Nochats />
             </Route>
             <Route path="/" exact>
                 <Home />

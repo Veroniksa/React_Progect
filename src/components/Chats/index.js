@@ -32,8 +32,6 @@ const list = [
    id: "Maria-3"},
 ];
 
-/* const mess = {text:"", author: AUTHORS.HUMAN}; */
-
 function Chats() {
 
   const {itemId} = useParams();
@@ -65,7 +63,6 @@ function Chats() {
     return () => clearTimeout(timer);
   },[messagesList]);
 
-
   const handelAddMessage = useCallback(
     (text) => {
       sendMessage(
@@ -75,23 +72,40 @@ function Chats() {
           id: `mess-${Date.now()}` ,
         }
       );
-  },[itemId, sendMessage]); 
+  },[itemId, sendMessage]);
+  
+  const handelAddChats = useCallback((name)=> {
+    const id = `chat-${Date.now()}`;
+    setItems((prevItems) => [
+      ...prevItems, 
+      {
+        id ,
+        name,
+      }
+    ]);
 
-/*   const handelAddMessage = useCallback(
-    ({text: text}) => {
-      setMessagesList((prevMessage) => [
-        ...prevMessage, 
-        text
-      ]);
-  },[]); */
+    setMessagesList((prevMessage) => ({
+      ...prevMessage,
+      [id]:[]
+    }));
+  }, []);
 
-/*   if(!items[itemId]){
-    return (<Redirect to="nochats"/>)
-  } */
+  const handelDeleteChat = useCallback((id) => {
+    const newChats = items.filter(item => item.id !== id);
+
+    setItems(newChats);
+
+    const newMess = {...messagesList};
+    delete newMess[id];
+
+    setMessagesList(newMess);
+  },[items, messagesList]);
   
   return (
     <div className="MessageList">
-      <ChartList items={items}/>
+      <ChartList items={items} 
+      onAddChat={handelAddChats} 
+      onDeleteChat={handelDeleteChat}/>
         {!!itemId && !!messagesList[itemId]  && (
           <>
             <Form onSubmit={handelAddMessage} />

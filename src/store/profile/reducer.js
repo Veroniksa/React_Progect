@@ -1,4 +1,3 @@
-import { Nochats } from "../../components/Nochats";
 import { CHECK_BOX, TOOGLE_SHOW_NAME } from "./action";
 
 const initialState = {
