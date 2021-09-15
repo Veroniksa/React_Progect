@@ -14,6 +14,7 @@ export const FormAddChat = ({onAddChat}) => {
 const handelSubmit = (e) => {
     e.preventDefault();
     onAddChat(value);
+    setValue('');
 };
 
 return(

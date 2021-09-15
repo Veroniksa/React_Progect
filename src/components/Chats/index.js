@@ -1,5 +1,5 @@
 
-import {useEffect, useState, useCallback } from 'react';
+import {useEffect, useState, useCallback, useMemo } from 'react';
 import { useParams } from "react-router";
 import {useHistory} from 'react-router-dom';
 import "../Message.css";
@@ -12,6 +12,7 @@ import { ChartList } from '../ChstList';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {addChat, deleteChat} from '../../store/chats/actions'
+import { addMessage } from '../../store/messages/actions';
 
 
 const initialMessages = {
@@ -43,16 +44,13 @@ function Chats() {
 
   const dispatch = useDispatch();
 
-  //const [items, setItems] = useState(list);
-  const items = useSelector[state => state.items.items];
+  const items = useSelector((state) => state.items.items);
 
-  const [messagesList, setMessagesList] = useState(initialMessages);
+  const messagesList = useSelector((state) => state.messagesList.messagesList);
 
-  const sendMessage = useCallback((messagesList) => {
-    setMessagesList((prevMessage) => ({
-      ...prevMessage,
-      [itemId]:[...prevMessage[itemId], messagesList]
-  }));
+  const sendMessage = useCallback(
+    (text, author) => {
+       dispatch(addMessage(itemId, text, author));
   }, [itemId]);
 
   useEffect(()=> {
@@ -61,11 +59,7 @@ function Chats() {
 
    if(!!itemId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN){
       timer = setTimeout(()=>{
-        sendMessage({
-        text: "Hello", 
-        author: AUTHORS.bot,
-        id: `mess-${Date.now()}`
-      });
+        sendMessage("Hello", AUTHORS.bot,);
       }, 2000); 
    }
     return () => clearTimeout(timer);
@@ -73,34 +67,15 @@ function Chats() {
 
   const handelAddMessage = useCallback(
     (text) => {
-      sendMessage(
-        {
-          text,
-          author: AUTHORS.HUMAN,
-          id: `mess-${Date.now()}` ,
-        }
-      );
-  },[itemId, sendMessage]);
+      sendMessage( text, AUTHORS.HUMAN);
+  },[sendMessage]);
   
   const handelAddChats = useCallback((name)=> {
     dispatch(addChat(name));
-
-/*     setMessagesList((prevMessage) => ({
-      ...prevMessage,
-      [id]:[]
-    })); */
-  }, []);
+  }, [dispatch]);
 
   const handelDeleteChat = useCallback((id) => {
     dispatch(deleteChat(id));
-    const newChats = items.filter(item => item.id !== id);
-
-    //setItems(newChats);
-
-    const newMess = {...messagesList};
-    delete newMess[id];
-
-    setMessagesList(newMess);
 
     if(itemId !== id) {
       return;
@@ -112,20 +87,26 @@ function Chats() {
       history.push(`/chats`);
     }
 
-  },[items, messagesList, itemId, dispatch]);
+  },[itemId, dispatch, items, history]);
+
+  const chatExists = useMemo(() => !!items.find(({ id }) => id === itemId), [
+    itemId,
+    items
+  ]);
   
   return (
     <div className="MessageList">
       <ChartList items={items} 
+      debugger
       onAddChat={handelAddChats} 
       onDeleteChat={handelDeleteChat}/>
-        {/* {!!itemId && !!messagesList[itemId]  && (
+        {!!itemId && chatExists  && (
           <>
             <Form onSubmit={handelAddMessage} />
-            {messagesList[itemId].map((message, i) => ( 
+            {(messagesList[itemId] || []).map((message, i) => ( 
             <MessageList key={message.id} text = {message.text} />))}
             </>
-        )} */}
+        )}
       </div>       
   );
 }

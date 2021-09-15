@@ -12,14 +12,8 @@ export const chatsReducer = (state = initalState, {type, payload}) => {
                 items: [...state.items, {id:`chat-${Date.now()}`, name: payload}],
             };
         }
-/*         case CHECK_BOX: {
-            return {
-                ...state,
-                checkBox: !state.checkBox
-            };
-        } */
         case DELETE_CHAT: {
-            const newChats = state.items(({id}) => id !== payload);
+            const newChats = state.items.filter(({ id }) => id !== payload);
             return {
                 ...state,
                 items: newChats,
