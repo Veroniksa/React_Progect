@@ -1,41 +1,39 @@
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-import { Home } from '../Home';
+import { Home } from "../Home";
 import Chats from "../Chats/";
 import { Profile, ThemeProfile } from "../Profile";
 
-
+import "./style.css";
 
 export const Routes = () => {
+  return (
+    <BrowserRouter className="router">
+      <div className="nav">
+        <ul className="links">
+          <li className="link">
+            <Link to="chats">Chats</Link>
+          </li>
+          <li>
+            <Link to="profile">Profile</Link>
+          </li>
+        </ul>
+      </div>
 
-    return (
-        <BrowserRouter>
-        <div>
-            <h3>Menu</h3>
-            <ul>
-                <li>
-                    <Link to="chats">Chats</Link>
-                </li>
-                <li>
-                    <Link to="profile">Profile</Link>
-                </li>
-            </ul>
-        </div>
-
-          <Switch>
-            <Route path="/profile">
-                <ThemeProfile />
-            </Route>
-            <Route static path="/chats/:itemId?">
-                <Chats />
-            </Route>
-            <Route path="/" exact>
-                <Home />
-            </Route>
-            <Route>
-                <h3>Error: 404</h3>
-            </Route>
-          </Switch>
-        </BrowserRouter>
-    )
-}
+      <Switch>
+        <Route path="/profile">
+          <ThemeProfile />
+        </Route>
+        <Route static path="/chats/:itemId?">
+          <Chats />
+        </Route>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route>
+          <h3>Error: 404</h3>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};

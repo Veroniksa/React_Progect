@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
 import "../Message.css";
 import { MessageList } from "../MessageList";
 import "../MessageList/MessageList.css";
@@ -10,10 +9,9 @@ import { Form } from "../Form";
 import { ChartList } from "../ChstList";
 import { useSelector, useDispatch } from "react-redux";
 
-import { deleteChat } from "../../store/chats/actions";
 import { addMessage } from "../../store/messages/actions";
-import { selectChats, selectIfChatExists } from "../../store/chats/selectors";
-import {selectMessages} from '../../store/messages/selectors';
+import { selectIfChatExists } from "../../store/chats/selectors";
+import { selectMessages } from "../../store/messages/selectors";
 
 const initialMessages = {
   "Leonardo-1": [
@@ -34,21 +32,15 @@ const list = [
 ];
 
 function Chats() {
-
   const { itemId } = useParams();
 
   const dispatch = useDispatch();
 
-  const items = useSelector(selectChats);
-
   const messagesList = useSelector(selectMessages);
 
-  const selectCatExists = useMemo(
-    () => selectIfChatExists(itemId),[
-      itemId
-    ]);
+  const selectCatExists = useMemo(() => selectIfChatExists(itemId), [itemId]);
 
-    const chatExists = useSelector(selectCatExists);
+  const chatExists = useSelector(selectCatExists);
 
   const sendMessage = useCallback(
     (text, author) => {
@@ -75,8 +67,6 @@ function Chats() {
     },
     [sendMessage]
   );
-
-
 
   return (
     <div className="MessageList">

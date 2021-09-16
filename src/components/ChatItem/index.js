@@ -7,10 +7,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { deleteChat } from "../../store/chats/actions";
 import { selectChats } from "../../store/chats/selectors";
 
+import "./style.css";
+
 export const ChatItem = ({ item, id, itemId }) => {
   const items = useSelector(selectChats);
 
-  const history = useHistory(); 
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -29,12 +31,9 @@ export const ChatItem = ({ item, id, itemId }) => {
   };
 
   return (
-    <ListItem>
+    <ListItem className="ListItem">
       <Link to={`/chats/${item.id}`}>{item.name}</Link>
-      <span onClick={handelDelete}>
-        Delete
-        <DeleteIcon />
-      </span>
+      <DeleteIcon className="ListBTN" onClick={handelDelete} />
     </ListItem>
   );
 };

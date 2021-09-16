@@ -6,18 +6,12 @@ import { useSelector } from "react-redux";
 import { selectChats } from "../../store/chats/selectors";
 
 export const ChartList = ({ itemId }) => {
-
   const items = useSelector(selectChats);
   return (
     <>
       <List>
         {items.map((item) => (
-          <ChatItem
-            item={item}
-            itemId={itemId}
-            key={item.id}
-            id={item.id}
-          />
+          <ChatItem item={item} itemId={itemId} key={item.id} id={item.id} />
         ))}
         <FormAddChat />
       </List>
