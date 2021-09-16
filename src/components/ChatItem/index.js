@@ -1,21 +1,40 @@
 import { ListItem } from "@material-ui/core";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import DeleteIcon from '@material-ui/icons/Delete';
+import { useHistory } from "react-router";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { deleteChat } from "../../store/chats/actions";
+import { selectChats } from "../../store/chats/selectors";
 
-export const ChatItem = ({ item, onDelete, id }) => {
-  const showName = useSelector((state) => state.showName);
-  console.log(showName);
+export const ChatItem = ({ item, id, itemId }) => {
+  const items = useSelector(selectChats);
+
+  const history = useHistory(); 
+
+  const dispatch = useDispatch();
 
   const handelDelete = () => {
-    onDelete(id);
+    dispatch(deleteChat(id));
+
+    if (itemId !== id) {
+      return;
+    }
+
+    if (!!items.length === 1) {
+      history.push(`/chats/${items[0].id}`);
+    } else {
+      history.push(`/chats`);
+    }
   };
 
-    return (
-            <ListItem>
-              <Link to={`/chats/${item.id}`}>{item.name}</Link>
-              <span onClick={handelDelete}>Delete<DeleteIcon  /></span>
-            </ListItem>
-    );
+  return (
+    <ListItem>
+      <Link to={`/chats/${item.id}`}>{item.name}</Link>
+      <span onClick={handelDelete}>
+        Delete
+        <DeleteIcon />
+      </span>
+    </ListItem>
+  );
 };

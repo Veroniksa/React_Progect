@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { List } from "@material-ui/core";
 import { ChatItem } from "../ChatItem";
 import { FormAddChat } from "../FormAddChat";
+import { useSelector } from "react-redux";
+import { selectChats } from "../../store/chats/selectors";
 
+export const ChartList = ({ itemId }) => {
 
-export const ChartList = ({ items, onDeleteChat, onAddChat }) => {
-
-    return (
-      <>
-      <List> 
+  const items = useSelector(selectChats);
+  return (
+    <>
+      <List>
         {items.map((item) => (
-          <ChatItem item={item} 
-          key={item.id} 
-          id={item.id} 
-          onDelete={onDeleteChat}/>
+          <ChatItem
+            item={item}
+            itemId={itemId}
+            key={item.id}
+            id={item.id}
+          />
         ))}
-        <FormAddChat onAddChat={onAddChat} />
+        <FormAddChat />
       </List>
-      </>
-    );
+    </>
+  );
 };

@@ -4,6 +4,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import { changeName, checkBoxOff, toggleShowName } from "../../store/profile/action";
 import { ThemeContext } from "../utils/ThemeContext";
+import { selectProfileCheckBox, selectProfileName, selectProfileShowName } from "../../store/profile/selectors";
 
 const withContext = (Component) => {//Дикоратор
   return (...props) => {
@@ -15,11 +16,11 @@ const withContext = (Component) => {//Дикоратор
 
   export const Profile = ({theme}) => {
     const [value, setValue] = useState('');
-    const showName = useSelector((state) => state.showName);
-    const name = useSelector((state) => state.name);
+    const showName = useSelector(selectProfileShowName);
+    const name = useSelector(selectProfileName);
     const dispatch = useDispatch();
 
-    const checkBox = useSelector((state) => state.checkBox);
+    const checkBox = useSelector(selectProfileCheckBox);
     const dispatchBox = useDispatch();
 
     const handelClick = () => {

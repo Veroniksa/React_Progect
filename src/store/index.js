@@ -1,15 +1,15 @@
-import { createStore, combineReducers} from 'redux';
-import { chatsReducer } from './chats/reducer';
-import { messageReducer } from './messages/reducer';
-import { profileReducer } from './profile/reducer';
+import { createStore, combineReducers } from "redux";
+import { chatsReducer } from "./chats/reducer";
+import { messageReducer } from "./messages/reducer";
+import { profileReducer } from "./profile/reducer";
 
 const rootReducer = combineReducers({
-    profile: profileReducer,
-    items: chatsReducer,
-    messagesList: messageReducer,
+  profile: profileReducer,
+  items: chatsReducer,
+  messagesList: messageReducer,
 });
 
 export const store = createStore(
-    rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
