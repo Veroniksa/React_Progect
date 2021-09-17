@@ -1,15 +1,15 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router";
-import "../Message.css";
+import { useSelector, useDispatch } from "react-redux";
 import { MessageList } from "../MessageList";
 import "../MessageList/MessageList.css";
+import "../Message.css";
 
 import { AUTHORS } from "../utils/constans";
 import { Form } from "../Form";
 import { ChartList } from "../ChstList";
-import { useSelector, useDispatch } from "react-redux";
 
-import { addMessage } from "../../store/messages/actions";
+import { addMessage, addMessageWithReplay } from "../../store/messages/actions";
 import { selectIfChatExists } from "../../store/chats/selectors";
 import { selectMessages } from "../../store/messages/selectors";
 
@@ -44,22 +44,11 @@ function Chats() {
 
   const sendMessage = useCallback(
     (text, author) => {
-      dispatch(addMessage(itemId, text, author));
+      dispatch(addMessageWithReplay(itemId, text, author));
     },
     [itemId]
   );
 
-  useEffect(() => {
-    let timer;
-    const curMess = messagesList[itemId];
-
-    if (!!itemId && curMess?.[curMess.length - 1]?.author === AUTHORS.HUMAN) {
-      timer = setTimeout(() => {
-        sendMessage("Hello", AUTHORS.bot);
-      }, 2000);
-    }
-    return () => clearTimeout(timer);
-  }, [messagesList]);
 
   const handelAddMessage = useCallback(
     (text) => {

@@ -3,7 +3,8 @@ import {Provider} from 'react-redux';
 import { Routes } from './components/Routes';
 import './App.css';
 import { ThemeContext } from './components/utils/ThemeContext';
-import { store } from './store';
+import { persistor, store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
   
 function App() {
 
@@ -15,9 +16,11 @@ function App() {
 
   return (
     <Provider store={store}>
+      <PersistGate persistor = {persistor} >
       <ThemeContext.Provider value={{theme, changeTheme}}>
         <Routes />
       </ThemeContext.Provider>
+      </PersistGate>
     </Provider>
   );
 }
