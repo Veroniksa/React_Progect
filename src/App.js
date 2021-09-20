@@ -1,13 +1,24 @@
-import logo from './logo.svg';
+import { useCallback, useState } from 'react';
+import {Provider} from 'react-redux';
+import { Routes } from './components/Routes';
 import './App.css';
-import { Message } from './components/Message';
-import "./components/Message.css"
-
+import { ThemeContext } from './components/utils/ThemeContext';
+import { store } from './store';
+  
 function App() {
+
+  const [theme, setTheme] = useState("light");
+
+  const changeTheme = useCallback(() => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  }, []);
+
   return (
-    <div className="Message">
-      <Message name="Leonardo" age={26} text="Vivo in Italia e mangio la pizza"/>
-    </div>
+    <Provider store={store}>
+      <ThemeContext.Provider value={{theme, changeTheme}}>
+        <Routes />
+      </ThemeContext.Provider>
+    </Provider>
   );
 }
 
