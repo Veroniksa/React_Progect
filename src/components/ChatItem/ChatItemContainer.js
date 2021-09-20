@@ -8,8 +8,9 @@ import { deleteChat } from "../../store/chats/actions";
 import { selectChats, selectChatsLength, selectFerstChatId } from "../../store/chats/selectors";
 
 import "./style.css";
+import { ChatItemView } from "./ChatItenView";
 
-export const ChatItem = ({ item }) => {
+export const ChatItemContainer = ({ item }) => {
   const { itemId } = useParams();
   const ferstChatId = useSelector(selectFerstChatId);
   const chatsLength = useSelector(selectChatsLength);
@@ -32,10 +33,5 @@ export const ChatItem = ({ item }) => {
     }
   };
 
-  return (
-    <ListItem className="ListItem">
-      <Link to={`/chats/${item.id}`}>{item.name}</Link>
-      <DeleteIcon className="ListBTN" onClick={handelDelete} />
-    </ListItem>
-  );
+  return <ChatItemView name={item.name} id={item.id} onDelete={handelDelete} />
 };

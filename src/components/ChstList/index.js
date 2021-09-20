@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { List } from "@material-ui/core";
-import { ChatItem } from "../ChatItem";
-import { FormAddChat } from "../FormAddChat";
+import { ChatItemContainer } from "../ChatItem/ChatItemContainer";
 import { useSelector } from "react-redux";
 import { selectChats } from "../../store/chats/selectors";
+import { FormAddChat } from "../FormAddChat";
 
 export const ChartList = ({ itemId }) => {
   const items = useSelector(selectChats);
@@ -11,7 +11,7 @@ export const ChartList = ({ itemId }) => {
     <>
       <List>
         {items.map((item) => (
-          <ChatItem item={item} itemId={itemId} key={item.id} id={item.id} />
+          <ChatItemContainer item={item} itemId={itemId} key={item.id} id={item.id} />
         ))}
         <FormAddChat />
       </List>

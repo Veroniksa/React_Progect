@@ -6,10 +6,10 @@ import "../MessageList/MessageList.css";
 import "../Message.css";
 
 import { AUTHORS } from "../utils/constans";
-import { Form } from "../Form";
+import { FormContainer } from "../Form/FormContainer";
 import { ChartList } from "../ChstList";
 
-import { addMessage, addMessageWithReplay } from "../../store/messages/actions";
+import { addMessageWithReplay } from "../../store/messages/actions";
 import { selectIfChatExists } from "../../store/chats/selectors";
 import { selectMessages } from "../../store/messages/selectors";
 
@@ -62,7 +62,7 @@ function Chats() {
       <ChartList itemId={itemId} />
       {!!itemId && chatExists && (
         <>
-          <Form onSubmit={handelAddMessage} />
+          <FormContainer onSubmit={handelAddMessage} />
           {(messagesList[itemId] || []).map((message, i) => (
             <MessageList key={message.id} text={message.text} />
           ))}

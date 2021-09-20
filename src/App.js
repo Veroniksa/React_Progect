@@ -16,7 +16,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <PersistGate persistor = {persistor} >
+      <PersistGate persistor = {persistor}>
       <ThemeContext.Provider value={{theme, changeTheme}}>
         <Routes />
       </ThemeContext.Provider>
