@@ -5,6 +5,7 @@ import Chats from "../Chats/";
 import { Profile, ThemeProfile } from "../Profile";
 
 import "./style.css";
+import { News } from "../News";
 
 export const Routes = () => {
   return (
@@ -17,6 +18,9 @@ export const Routes = () => {
           <li>
             <Link to="profile">Profile</Link>
           </li>
+          <li>
+            <Link to="news">News</Link>
+          </li>
         </ul>
       </div>
 
@@ -26,6 +30,9 @@ export const Routes = () => {
         </Route>
         <Route static path="/chats/:itemId?">
           <Chats />
+        </Route>
+        <Route path="/news">
+          <News />
         </Route>
         <Route path="/" exact>
           <Home />
