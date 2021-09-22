@@ -1,0 +1,9 @@
+.nav{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.links{
+    display: flex;
+    justify-content: space-around;
+}
