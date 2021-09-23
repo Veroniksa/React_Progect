@@ -11,3 +11,6 @@ export const REQUEST_STATUS = {
   SUCCESS: "success",
   FAILURE: "failure",
 };
+
+export const WEATHER_URL = "https://goweather.herokuapp.com/weather/moscow";
+

@@ -6,6 +6,7 @@ import { Profile, ThemeProfile } from "../Profile";
 
 import "./style.css";
 import { News } from "../News";
+import { Weather } from "../Weatherher";
 
 export const Routes = () => {
   return (
@@ -21,6 +22,9 @@ export const Routes = () => {
           <li>
             <Link to="news">News</Link>
           </li>
+          <li>
+            <Link to="weather">Weather</Link>
+          </li>
         </ul>
       </div>
 
@@ -33,6 +37,9 @@ export const Routes = () => {
         </Route>
         <Route path="/news">
           <News />
+        </Route>
+        <Route path="/weather">
+          <Weather />
         </Route>
         <Route path="/" exact>
           <Home />

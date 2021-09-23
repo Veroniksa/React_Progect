@@ -18,7 +18,7 @@ const getArticlesFailure = (error) => ({
   payload: error,
 });
 
- export const getArticles = () => (dispatch) => {
+/*  export const getArticles = () => (dispatch) => {
    dispatch(getArticlesPending());
 
    fetch(URL_PUBLIC)
@@ -36,4 +36,23 @@ const getArticlesFailure = (error) => ({
        console.log(e);
        dispatch(getArticlesFailure(e.message));
      });
- };
+ }; */
+
+ export const getArticles = () => async (dispatch) => {
+  dispatch(getArticlesPending());
+
+  try {
+    const response = await fetch(URL_PUBLIC);
+
+    if (!response.ok) {
+      throw new Error(`error ${response.status}`);
+    }
+
+    const result = await response.json();
+    dispatch(GetArticlesSuccess(result));
+  }
+    catch(e) {
+      console.log(e);
+      dispatch(getArticlesFailure(e.message));
+    }
+};
