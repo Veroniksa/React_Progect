@@ -6,7 +6,7 @@ import { Profile, ThemeProfile } from "../Profile";
 
 import "./style.css";
 import { News } from "../News";
-import { Weather } from "../Weatherher";
+import { Weather } from "../Weather";
 
 export const Routes = () => {
   return (

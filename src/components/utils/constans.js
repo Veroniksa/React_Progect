@@ -12,5 +12,5 @@ export const REQUEST_STATUS = {
   FAILURE: "failure",
 };
 
-export const WEATHER_URL = "https://goweather.herokuapp.com/weather/moscow";
+export const WEATHER_URL = "https://goweather.herokuapp.com/weather/Rome";
 

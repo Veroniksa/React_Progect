@@ -7,6 +7,7 @@ import { chatsReducer } from "./chats/reducer";
 import { messageReducer } from "./messages/reducer";
 import { profileReducer } from "./profile/reducer";
 import { newsReduser } from "./articles/reducer";
+import { tempsReducer } from "./weather/reducer";
 
 const persistConfig = {
   key: "VeroNiksa",
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   items: chatsReducer,
   messagesList: messageReducer,
   news: newsReduser,
+  tempo: tempsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
