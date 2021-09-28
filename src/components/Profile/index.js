@@ -24,9 +24,14 @@ export const Profile = ({ theme, onLogaut }) => {
     dispatchBox(checkBoxOff);
   };
 
+  const handelClick = () => {
+    onLogaut();
+  };
+
   return (
     <>
-      <ProfileTop theme={theme} onLogaut={onLogaut} />
+      <ProfileTop theme={theme} />
+      <button onClick={handelClick}>Logaut</button>
 
       <ProfileForm />
 

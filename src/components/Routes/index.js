@@ -8,19 +8,44 @@ import "./style.css";
 import { News } from "../News";
 import { Weather } from "../Weather";
 import { PrivateRoute } from "../PrivateRoute";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PublicRoute } from "../PublicRoute";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth, login, signUp, signOut } from "../../services/firebase";
 
 export const Routes = () => {
   const [authed, setAuthed] = useState(false);
-  const handelLogin = () => {
-    setAuthed(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if(user) {
+        setAuthed(true);
+      } else {
+        setAuthed(false);
+      }
+    });
+
+    return unsubscribe;
+  },[]);
+
+   const handleLogin = async(email, pass) => {
+    try{
+      await login(email, pass);
+      setAuthed(true);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const handelLogaut = () => {
+  const handleLogout = () => {
     setAuthed(false);
   };
 
+  const handleSignUp = () => {
+    console.log("hello");
+  }
+  
   return (
     <BrowserRouter className="router">
       <div className="nav">
@@ -42,7 +67,7 @@ export const Routes = () => {
 
       <Switch>
         <PrivateRoute path="/profile" authed={authed}>
-          <ThemeProfile onLogaut={handelLogaut} />
+          <ThemeProfile onLogaut={handleLogout} />
         </PrivateRoute>
         <PrivateRoute static path="/chats/:itemId?" authed={authed}>
           <Chats />
@@ -53,8 +78,11 @@ export const Routes = () => {
         <Route path="/weather">
           <Weather />
         </Route>
-        <PublicRoute path="/" exact authed={authed}>
-          <Home onLogin={handelLogin} />
+        <PublicRoute path="/login" exact authed={authed}>
+          <Home onLogin={handleLogin} />
+        </PublicRoute>
+        <PublicRoute path="/signup" exact authed={authed}>
+          <Home onSignUp={handleSignUp} />
         </PublicRoute>
         <Route>
           <h3>Error: 404</h3>

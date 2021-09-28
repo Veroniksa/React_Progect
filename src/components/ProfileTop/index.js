@@ -13,16 +13,16 @@ export const ProfileTop = ({onLogaut}) => {
   const name = useSelector(selectProfileName);
   const theme = useContext(ThemeContext);
 
-  const handelClick = () => {
+  /* const handelClick = () => {
     onLogaut();
-  };
+  }; */
 
   return (
     <>
       <h2 style={{ color: theme.theme === "light" ? "red" : "blue" }}>
         This is page of profile
       </h2>
-      <button onClick={handelClick}>Logaut</button>
+      {/* <button onClick={handelClick}>Logaut</button> */}
       {showName && <div>{name}</div>}
     </>
   );
