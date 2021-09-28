@@ -16,7 +16,7 @@ const withContext = (Component) => {
   };
 };
 
-export const Profile = ({ theme, onLogaut }) => {
+export const Profile = ({ theme, onLogout }) => {
   const checkBox = useSelector(selectProfileCheckBox);
   const dispatchBox = useDispatch();
 
@@ -25,7 +25,8 @@ export const Profile = ({ theme, onLogaut }) => {
   };
 
   const handelClick = () => {
-    onLogaut();
+    debugger
+    onLogout();
   };
 
   return (

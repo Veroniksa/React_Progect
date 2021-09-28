@@ -15,6 +15,7 @@ import { auth, login, signUp, signOut } from "../../services/firebase";
 
 export const Routes = () => {
   const [authed, setAuthed] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -35,16 +36,30 @@ export const Routes = () => {
       setAuthed(true);
     } catch (e) {
       console.log(e);
+      //setError()
     }
   };
 
-  const handleLogout = () => {
-    setAuthed(false);
+  const handleSignUp = async (email, pass) => {
+    try{
+      await signUp(email, pass);
+      //setAuthed(true)
+    } catch (e) {
+      console.log(e);
+      //setError()
+    }
   };
 
-  const handleSignUp = () => {
-    console.log("hello");
-  }
+  const handleLogout = async() => {
+    try {
+      await signOut();
+      //setAuthed(false)
+    } catch (e) {
+      console.log(e);
+      //setError()
+    }
+  };
+
   
   return (
     <BrowserRouter className="router">
@@ -66,8 +81,8 @@ export const Routes = () => {
       </div>
 
       <Switch>
-        <PrivateRoute path="/profile" authed={authed}>
-          <ThemeProfile onLogaut={handleLogout} />
+        <PrivateRoute path="/profile" exact authed={authed}>
+          <ThemeProfile onLogout={handleLogout} />
         </PrivateRoute>
         <PrivateRoute static path="/chats/:itemId?" authed={authed}>
           <Chats />

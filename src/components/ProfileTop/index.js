@@ -17,6 +17,7 @@ export const ProfileTop = ({onLogaut}) => {
     onLogaut();
   }; */
 
+
   return (
     <>
       <h2 style={{ color: theme.theme === "light" ? "red" : "blue" }}>
