@@ -16,7 +16,7 @@ const withContext = (Component) => {
   };
 };
 
-export const Profile = ({ theme }) => {
+export const Profile = ({ theme, onLogaut }) => {
   const checkBox = useSelector(selectProfileCheckBox);
   const dispatchBox = useDispatch();
 
@@ -26,7 +26,7 @@ export const Profile = ({ theme }) => {
 
   return (
     <>
-      <ProfileTop theme={theme} />
+      <ProfileTop theme={theme} onLogaut={onLogaut} />
 
       <ProfileForm />
 

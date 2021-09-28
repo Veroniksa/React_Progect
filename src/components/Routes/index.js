@@ -7,8 +7,20 @@ import { Profile, ThemeProfile } from "../Profile";
 import "./style.css";
 import { News } from "../News";
 import { Weather } from "../Weather";
+import { PrivateRoute } from "../PrivateRoute";
+import { useState } from "react";
+import { PublicRoute } from "../PublicRoute";
 
 export const Routes = () => {
+  const [authed, setAuthed] = useState(false);
+  const handelLogin = () => {
+    setAuthed(true);
+  };
+
+  const handelLogaut = () => {
+    setAuthed(false);
+  };
+
   return (
     <BrowserRouter className="router">
       <div className="nav">
@@ -29,21 +41,21 @@ export const Routes = () => {
       </div>
 
       <Switch>
-        <Route path="/profile">
-          <ThemeProfile />
-        </Route>
-        <Route static path="/chats/:itemId?">
+        <PrivateRoute path="/profile" authed={authed}>
+          <ThemeProfile onLogaut={handelLogaut} />
+        </PrivateRoute>
+        <PrivateRoute static path="/chats/:itemId?" authed={authed}>
           <Chats />
-        </Route>
+        </PrivateRoute>
         <Route path="/news">
           <News />
         </Route>
         <Route path="/weather">
           <Weather />
         </Route>
-        <Route path="/" exact>
-          <Home />
-        </Route>
+        <PublicRoute path="/" exact authed={authed}>
+          <Home onLogin={handelLogin} />
+        </PublicRoute>
         <Route>
           <h3>Error: 404</h3>
         </Route>

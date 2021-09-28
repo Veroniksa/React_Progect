@@ -5,7 +5,7 @@ export const toggleShowName = {
     type: TOOGLE_SHOW_NAME,
 };
 
-export const CHECK_BOX = 'PROFILE//CHECK_BOX';
+export const CHECK_BOX = 'PROFILE::CHECK_BOX';
 
 export const checkBoxOff = {
     type: CHECK_BOX,

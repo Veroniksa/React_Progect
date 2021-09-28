@@ -8,14 +8,13 @@ import {
 } from "../../store/profile/selectors";
 import { ThemeContext } from "../utils/ThemeContext";
 
-export const ProfileTop = () => {
+export const ProfileTop = ({onLogaut}) => {
   const showName = useSelector(selectProfileShowName);
   const name = useSelector(selectProfileName);
-  const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
 
   const handelClick = () => {
-    dispatch(toggleShowName);
+    onLogaut();
   };
 
   return (
@@ -23,7 +22,7 @@ export const ProfileTop = () => {
       <h2 style={{ color: theme.theme === "light" ? "red" : "blue" }}>
         This is page of profile
       </h2>
-      <button onClick={handelClick}>Toggle show name</button>
+      <button onClick={handelClick}>Logaut</button>
       {showName && <div>{name}</div>}
     </>
   );
