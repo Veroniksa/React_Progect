@@ -1,12 +1,11 @@
 //ref получение ссылки на бд
-//и необходима для других методов, ктоторый предоставляет этот модуль
+//и необходима для других методов, который предоставляет этот модуль
 
 // onValue подписка на события изменения значения в бд
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ref, set, onValue } from "@firebase/database";
+import { ref, set, onValue } from "firebase/database";
 import { db } from "../../services/firebase";
-
 import { changeName } from "../../store/profile/action";
 
 export const ProfileForm = () => {
@@ -31,11 +30,10 @@ export const ProfileForm = () => {
 
   useEffect(() => {
     const userDbRef = ref(db, "user");
-    debugger
     onValue(userDbRef, (snapshot) => {
       const data = snapshot.val();
-      console.log("--------", data);
-      setName(data?.username || "");
+      console.log('--------', data);
+      setName(data?.username || '');
     });
   }, []);
 

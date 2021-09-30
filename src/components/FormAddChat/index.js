@@ -31,7 +31,7 @@ export const FormAddChat = () => {
 
     const newId = `chats-${Date.now()}`;
 
-    const itemsDbRef = ref(db, `chats/${newId}`);
+    const itemsDbRef = ref(db, `items/${newId}`);
 
     set(itemsDbRef, {
       id: newId,

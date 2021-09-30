@@ -68,6 +68,14 @@ export const Routes = () => {
           <li>
             <Link to="weather">Weather</Link>
           </li>
+          <ul>
+          <li>
+            <Link to="login">Login</Link>
+          </li>
+          <li>
+            <Link to="signup">Sign up</Link>
+          </li>
+          </ul>
         </ul>
       </div>
 
