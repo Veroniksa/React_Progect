@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch } from "react-redux";
-import { addChat } from "../../store/chats/actions";
+import { onValue, ref, set } from "@firebase/database";
+import { db } from "../../services/firebase";
 
 export const FormAddChat = () => {
   const dispatch = useDispatch();
+
+  const [items, setItems] = useState();
 
   const [value, setValue] = useState("");
 
@@ -14,9 +17,28 @@ export const FormAddChat = () => {
     setValue(e.target.value);
   };
 
+  useEffect(() => {
+    const itemsDbRef = ref(db, "items");
+    onValue(itemsDbRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log("-----", data);
+      setItems(Object.values(data || {}));
+    });
+  }, []);
+
   const handelSubmit = (e) => {
     e.preventDefault();
-    dispatch(addChat(value));
+
+    const newId = `chats-${Date.now()}`;
+
+    const itemsDbRef = ref(db, `chats/${newId}`);
+
+    set(itemsDbRef, {
+      id: newId,
+      name: value,
+    });
+
+    //dispatch(addChat(value));
     setValue("");
   };
 

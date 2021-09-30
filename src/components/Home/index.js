@@ -8,15 +8,15 @@ export const Home = ({ onLogin, onSignUp }) => {
     setLogin(e.target.value);
   };
 
-  const handleLogin = async(email, pass) => {
+/*   const handleLogin = async(email, pass) => {
     try{
       await login(email, pass);
       //setAuthed(true);
     } catch (e) {
       console.log(e);
-      //setError()
+      //TODO setError()
     }
-  };
+  }; */
 
   const handelPassChange = (e) => {
     setPass(e.target.value);

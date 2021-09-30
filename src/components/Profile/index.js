@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "@material-ui/core/Checkbox";
+import { signOut } from "../../services/firebase";
 
 import { ThemeContext } from "../utils/ThemeContext";
 import { selectProfileCheckBox } from "../../store/profile/selectors";
@@ -16,23 +17,28 @@ const withContext = (Component) => {
   };
 };
 
-export const Profile = ({ theme, onLogout }) => {
+export const Profile = ({ theme }) => {
   const checkBox = useSelector(selectProfileCheckBox);
   const dispatchBox = useDispatch();
+  //const [error, setError] = useState("");
 
   const onChange = () => {
     dispatchBox(checkBoxOff);
   };
 
-  const handelClick = () => {
-    debugger
-    onLogout();
+  const handleLogout = async () => {
+    try {
+      await signOut();
+    } catch (e) {
+      console.log(e);
+      //TODO setError();
+    }
   };
 
   return (
     <>
       <ProfileTop theme={theme} />
-      <button onClick={handelClick}>Logaut</button>
+      <button onClick={handleLogout}>Logaut</button>
 
       <ProfileForm />
 

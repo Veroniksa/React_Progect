@@ -1,5 +1,5 @@
 import { ListItem } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory, useParams } from "react-router";
@@ -9,6 +9,7 @@ import { selectChats, selectChatsLength, selectFerstChatId } from "../../store/c
 
 import "./style.css";
 import { ChatItemView } from "./ChatItenView";
+
 
 export const ChatItemContainer = ({ item }) => {
   const { itemId } = useParams();
@@ -32,6 +33,7 @@ export const ChatItemContainer = ({ item }) => {
       history.push(`/chats`);
     }
   };
+
 
   return <ChatItemView name={item.name} id={item.id} onDelete={handelDelete} />
 };
