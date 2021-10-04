@@ -6,15 +6,16 @@ import { selectChats } from "../../store/chats/selectors";
 import { FormAddChat } from "../FormAddChat";
 
 export const ChartList = ({ itemId }) => {
-  const items = useSelector(selectChats);
-
+  //const items = useSelector(selectChats);
+  const [items, setItems] = useState();
+  
   return (
     <>
       <List>
-        {items.map((item) => (
+        {(items || []).map((item) => (
           <ChatItemContainer item={item} itemId={itemId} key={item.id} id={item.id} />
         ))}
-        <FormAddChat />
+        <FormAddChat items={items} setItems={setItems} />
       </List>
     </>
   );

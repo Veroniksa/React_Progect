@@ -2,9 +2,9 @@
 //и необходима для других методов, который предоставляет этот модуль
 
 // onValue подписка на события изменения значения в бд
+import { ref, set, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ref, set, onValue } from "firebase/database";
 import { db } from "../../services/firebase";
 import { changeName } from "../../store/profile/action";
 
@@ -28,17 +28,17 @@ export const ProfileForm = () => {
 
   //когда snapshot пуст = null
 
+
   useEffect(() => {
     const userDbRef = ref(db, "user");
     onValue(userDbRef, (snapshot) => {
       const data = snapshot.val();
-      console.log('--------', data);
-      setName(data?.username || '');
+      console.log('-----------', data);
+      setName(data.username || '');
     });
   }, []);
 
   const handelSubmit = (e) => {
-    console.log(db);
     e.preventDefault();
     setValue("");
     set(ref(db, "user"), {

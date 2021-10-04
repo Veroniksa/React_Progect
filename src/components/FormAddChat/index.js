@@ -6,10 +6,9 @@ import { useDispatch } from "react-redux";
 import { onValue, ref, set } from "@firebase/database";
 import { db } from "../../services/firebase";
 
-export const FormAddChat = () => {
+export const FormAddChat = ({setItems}) => {
   const dispatch = useDispatch();
 
-  const [items, setItems] = useState();
 
   const [value, setValue] = useState("");
 

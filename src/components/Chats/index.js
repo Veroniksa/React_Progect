@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { MessageList } from "../MessageList";
@@ -12,6 +12,8 @@ import { ChartList } from "../ChstList";
 import { addMessageWithReplay } from "../../store/messages/actions";
 import { selectIfChatExists } from "../../store/chats/selectors";
 import { selectMessages } from "../../store/messages/selectors";
+import { onValue, ref, set } from "@firebase/database";
+import { db } from "../../services/firebase";
 
 const initialMessages = {
   "Leonardo-1": [
@@ -33,22 +35,54 @@ const list = [
 
 function Chats() {
   const { itemId } = useParams();
-
   const dispatch = useDispatch();
 
-  const messagesList = useSelector(selectMessages);
+  const [items, setItems] = useState([]);
+  const [messagesList, setMessagesList] = useState([]);
 
-  const selectCatExists = useMemo(() => selectIfChatExists(itemId), [itemId]);
+  const unsubscribeMessagessList = useRef(null);
 
-  const chatExists = useSelector(selectCatExists);
+  //const messagesList = useSelector(selectMessages);
+
+  //const selectCatExists = useMemo(() => selectIfChatExists(itemId), [itemId]);
+
+  useEffect(() => {
+    const itemsDbRef = ref(db, "items");
+    onValue(itemsDbRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log("------", data);
+      setItems(Object.values(data || {}));
+    });
+  }, []);
+
+  useEffect(() => {
+    if (unsubscribeMessagessList.current) {
+      unsubscribeMessagessList.current();
+    }
+    const messagesListDbRef = ref(db, `messagesList/${itemId}`);
+    const unsubscribe = onValue(messagesListDbRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log("------", data);
+      setMessagesList(Object.values(data || {}));
+    });
+
+    unsubscribeMessagessList.current = unsubscribe;
+
+    return () => unsubscribe();
+  }, [itemId]);
 
   const sendMessage = useCallback(
     (text, author) => {
-      dispatch(addMessageWithReplay(itemId, text, author));
+      const newId = `messagesList-${Date.now()}`;
+      const messagesListDbRef = ref(db, `messagesList/${itemId}/${newId}`);
+      set(messagesListDbRef, {
+        author,
+        text,
+        id: newId,
+      });
     },
     [itemId]
   );
-
 
   const handelAddMessage = useCallback(
     (text) => {
@@ -57,13 +91,20 @@ function Chats() {
     [sendMessage]
   );
 
+  //const chatExists = useSelector(selectCatExists);
+
+  const chatExists = useMemo(
+    () => items.find(({ id }) => id === itemId),
+    [itemId, items]
+  );
+
   return (
     <div className="MessageList">
       <ChartList itemId={itemId} />
       {!!itemId && chatExists && (
         <>
           <FormContainer onSubmit={handelAddMessage} />
-          {(messagesList[itemId] || []).map((message, i) => (
+          {(messagesList || []).map((message) => (
             <MessageList key={message.id} text={message.text} />
           ))}
         </>
