@@ -56,4 +56,5 @@ export const addMessageFb = (text, author, itemId) => (dispatch) => {
     text,
     id: newId,
   });
+  //TODO risposta di bot
 };

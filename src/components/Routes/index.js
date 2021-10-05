@@ -28,6 +28,7 @@ export const Routes = () => {
         setAuthed(false);
       }
     });
+    //dispatch(onAuthFb);
 
     return unsubscribe;
   }, []);
@@ -40,6 +41,7 @@ export const Routes = () => {
       console.log(e);
       //setError()
     }
+    //dispatch(userLogin(email, pass))
   };
 
   const handleSignUp = async (email, pass) => {
@@ -50,6 +52,7 @@ export const Routes = () => {
       console.log(e);
       //setError()
     }
+    //dispatch(userSignUp(email, pass));
   };
 
   return (

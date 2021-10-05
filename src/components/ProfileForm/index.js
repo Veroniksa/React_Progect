@@ -4,11 +4,14 @@
 // onValue подписка на события изменения значения в бд
 import { ref, set, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { db } from "../../services/firebase";
+import { userChange, userNameChange } from "../../store/profile/action";
 
 export const ProfileForm = () => {
   const [value, setValue] = useState("");
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
 
   //set(работает почти так же как и ref)
   //первым аргументом передаем ссылку на объект бд
@@ -27,20 +30,20 @@ export const ProfileForm = () => {
 
 
   useEffect(() => {
-    const userDbRef = ref(db, "user");
+    /* const userDbRef = ref(db, "user");
     onValue(userDbRef, (snapshot) => {
       const data = snapshot.val();
       console.log('-----------', data);
       setName(data?.username || '');
-    });
+    }); */
+    dispatch(userChange(name));
+    
   }, []);
 
   const handelSubmit = (e) => {
     e.preventDefault();
     setValue("");
-    set(ref(db, "user"), {
-      username: value,
-    });
+    dispatch(userNameChange(value));
   };
 
   const handelChange = (e) => {
@@ -54,7 +57,6 @@ export const ProfileForm = () => {
         <button>Submit</button>
       </form>
 
-      <div>{name}</div>
     </>
   );
 };
