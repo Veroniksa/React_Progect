@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "@material-ui/core/Checkbox";
 import { signOut } from "../../services/firebase";

@@ -1,11 +1,8 @@
-import { ListItem } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useHistory, useParams } from "react-router";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { deleteChat } from "../../store/chats/actions";
-import { selectChats, selectChatsLength, selectFerstChatId } from "../../store/chats/selectors";
+import { selectChatsLength, selectFerstChatId } from "../../store/chats/selectors";
 
 import "./style.css";
 import { ChatItemView } from "./ChatItenView";

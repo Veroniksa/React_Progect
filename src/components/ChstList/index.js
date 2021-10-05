@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { List } from "@material-ui/core";
 import { ChatItemContainer } from "../ChatItem/ChatItemContainer";
 import { useSelector } from "react-redux";
@@ -7,15 +7,22 @@ import { FormAddChat } from "../FormAddChat";
 
 export const ChartList = ({ itemId }) => {
   //const items = useSelector(selectChats);
-  const [items, setItems] = useState();
-  
+  const items = useSelector(selectChats);
+
   return (
     <>
       <List>
-        {(items || []).map((item) => (
-          <ChatItemContainer item={item} itemId={itemId} key={item.id} id={item.id} />
+        {(items || []).map((item, i) => (
+          <>
+            <ChatItemContainer
+              item={item}
+              itemId={itemId}
+              key={item.id}
+              id={item.id}
+            />
+          </>
         ))}
-        <FormAddChat items={items} setItems={setItems} />
+        <FormAddChat />
       </List>
     </>
   );

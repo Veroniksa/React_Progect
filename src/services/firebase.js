@@ -1,19 +1,25 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut as firbaseSignOut, getAuth } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut as firbaseSignOut,
+  getAuth,
+} from "firebase/auth";
 import { getDatabase } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAKNMSiCODOw9WK6BLpdiP3-OqAte6xT9c",
-  authDomain: "gb-example.firebaseapp.com",
-  databaseURL: "https://gb-example-default-rtdb.firebaseio.com",
-  projectId: "gb-example",
-  storageBucket: "gb-example.appspot.com",
-  messagingSenderId: "551097765406",
-  appId: "1:551097765406:web:2e6bba7d5058ba9f43e80f",
+  apiKey: "AIzaSyBRGUA39gjO23_QpPKBd6hyH5c0fIwqmok",
+  authDomain: "chat-with-react-fccaa.firebaseapp.com",
+  databaseURL:
+    "https://chat-with-react-fccaa-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "chat-with-react-fccaa",
+  storageBucket: "chat-with-react-fccaa.appspot.com",
+  messagingSenderId: "319658789973",
+  appId: "1:319658789973:web:49ed28d56c0a3f8b3e18dc",
 };
 
 // Initialize Firebase
@@ -31,5 +37,5 @@ export const login = async (email, pass) => {
 };
 
 export const signOut = async () => {
-    await firbaseSignOut(auth);
+  await firbaseSignOut(auth);
 };

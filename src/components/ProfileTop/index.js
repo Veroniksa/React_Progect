@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleShowName } from "../../store/profile/action";
+import { useSelector } from "react-redux";
 
 import {
   selectProfileName,

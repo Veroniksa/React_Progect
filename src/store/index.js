@@ -8,6 +8,7 @@ import { messageReducer } from "./messages/reducer";
 import { profileReducer } from "./profile/reducer";
 import { newsReduser } from "./articles/reducer";
 import { tempsReducer } from "./weather/reducer";
+import { homeReducer } from "./home/reducer";
 
 const persistConfig = {
   key: "VeroNiksa",
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   messagesList: messageReducer,
   news: newsReduser,
   tempo: tempsReducer,
+  //home: homeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
