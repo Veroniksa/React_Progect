@@ -1,4 +1,4 @@
-import { CHANGE_NAME, CHECK_BOX, ON_AUTH, TOOGLE_SHOW_NAME } from "./action";
+import { CHANGE_NAME, CHECK_BOX, ON_AUTH, TOOGLE_SHOW_NAME, ON_LOGOUT } from "./action";
 
 const initialState = {
     showName: false,
@@ -28,6 +28,12 @@ export const profileReducer = (state = initialState, {type, payload}) => { //{ty
             };
         }
         case ON_AUTH: {
+            return {
+                ...state,
+                user: payload,
+            };
+        }
+        case ON_LOGOUT: {
             return {
                 ...state,
                 user: payload,

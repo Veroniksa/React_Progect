@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   messagesList: messageReducer,
   news: newsReduser,
   tempo: tempsReducer,
-  //home: homeReducer,
+  home: homeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

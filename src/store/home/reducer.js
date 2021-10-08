@@ -1,8 +1,8 @@
 import { CHANGE_STATUS, HANDEL_LOGIN } from "./actions";
 
 const initialState = {
-  email: "",
-  pass: "",
+  email: null,
+  pass: null,
   authed: false,
   setAuthed: false,
 };
@@ -19,7 +19,11 @@ export const homeReducer = (state = initialState, { type, payload }) => {
     case CHANGE_STATUS: {
       return {
         ...state,
+        authed: payload.authed,
+        setAuthed: payload.setAuthed
       };
     }
+    default: 
+    return state
   }
 };

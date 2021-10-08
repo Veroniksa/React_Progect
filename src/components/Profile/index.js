@@ -5,7 +5,7 @@ import { signOut } from "../../services/firebase";
 
 import { ThemeContext } from "../utils/ThemeContext";
 import { selectProfileCheckBox } from "../../store/profile/selectors";
-import { checkBoxOff } from "../../store/profile/action";
+import { checkBoxOff, onLogout } from "../../store/profile/action";
 import { ProfileTop } from "../ProfileTop";
 import { ProfileForm } from "../ProfileForm";
 
@@ -20,6 +20,7 @@ const withContext = (Component) => {
 export const Profile = ({ theme }) => {
   const checkBox = useSelector(selectProfileCheckBox);
   const dispatchBox = useDispatch();
+  const dispatch = useDispatch();
   //const [error, setError] = useState("");
 
   const onChange = () => {
@@ -27,12 +28,13 @@ export const Profile = ({ theme }) => {
   };
 
   const handleLogout = async () => {
-    try {
+    /* try {
       await signOut();
     } catch (e) {
       console.log(e);
       //TODO setError();
-    }
+    } */
+    dispatch(onLogout);
   };
 
   return (

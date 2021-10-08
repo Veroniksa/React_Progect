@@ -1,11 +1,15 @@
 import { onValue, ref, set } from "@firebase/database";
 import { db } from "../../services/firebase";
+import { signOut } from "../../services/firebase";
+
 
 
 export const TOOGLE_SHOW_NAME = "PROFILE::TOGGLE_SHOW_NAME";
 export const CHANGE_NAME = "PROFILE::CHANGE_NAME";
 export const CHECK_BOX = "PROFILE::CHECK_BOX";
 export const ON_AUTH = "PROFILE::ON_AUTH";
+export const ON_LOGOUT = "PROFILE::ON_LOGOUT";
+
 
 export const toggleShowName = {
   type: TOOGLE_SHOW_NAME,
@@ -24,6 +28,17 @@ export const onAuth = (user) => ({
   type: ON_AUTH,
   payload: user,
 });
+
+
+export const onLogout = (user) => {
+  if(user) {
+    signOut();
+  } else {
+    console.log("null");
+    //TODO setError();
+  }
+};
+
 
 /* export const onAuthFb = onAuthStateChanged(auth, (user) => (dispatch) => {
     dispatch(onAuth);
