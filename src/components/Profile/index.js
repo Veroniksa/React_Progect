@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Checkbox from "@material-ui/core/Checkbox";
-import { signOut } from "../../services/firebase";
+import "./Profile.css";
 
 import { ThemeContext } from "../utils/ThemeContext";
 import { selectProfileCheckBox } from "../../store/profile/selectors";
 import { checkBoxOff, onLogout } from "../../store/profile/action";
 import { ProfileTop } from "../ProfileTop";
 import { ProfileForm } from "../ProfileForm";
+import { Button } from "@material-ui/core";
 
 const withContext = (Component) => {
   return (...props) => {
@@ -31,15 +31,16 @@ export const Profile = ({ theme }) => {
   };
 
   return (
-    <>
+    <div className="profile">
       <ProfileTop theme={theme} />
-      <button onClick={handleLogout}>Logaut</button>
-
       <ProfileForm />
+      <br/>
+      <hr/>
+      <Button variant="outlined" onClick={handleLogout}>Logaut</Button>
 
-      <Checkbox value={checkBox} onChange={onChange}></Checkbox>
-      {checkBox && <div>Check box is on</div>}
-    </>
+{/*       <Checkbox value={checkBox} onChange={onChange}></Checkbox>
+      {checkBox && <div>Check box is on</div>} */}
+    </div>
   );
 };
 

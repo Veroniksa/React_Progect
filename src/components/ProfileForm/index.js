@@ -2,10 +2,10 @@
 //и необходима для других методов, который предоставляет этот модуль
 
 // onValue подписка на события изменения значения в бд
-import { ref, set, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { db } from "../../services/firebase";
+import TextField from "@material-ui/core/TextField";
+import { Button } from "@material-ui/core";
 import { userChange, userNameChange } from "../../store/profile/action";
 
 export const ProfileForm = () => {
@@ -51,8 +51,13 @@ export const ProfileForm = () => {
   return (
     <>
       <form onClick={handelSubmit}>
-        <input type="text" value={value} onChange={handelChange} />
-        <button>Submit</button>
+        <TextField 
+        type="text" 
+        value={value} 
+        onChange={handelChange}
+        label="Write your name"
+        autofocus />
+        <Button variant="outlined" disabled={!value}>Submit</Button>
       </form>
     </>
   );

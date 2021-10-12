@@ -22,6 +22,8 @@ export const ProfileTop = ({onLogaut}) => {
       <h2 style={{ color: theme.theme === "light" ? "red" : "blue" }}>
         This is page of profile
       </h2>
+      <hr/>
+      {(!{name} && <h3>Welcome, {name}</h3>)}
       {/* <button onClick={handelClick}>Logaut</button> */}
       {showName && <div>{name}</div>}
     </>

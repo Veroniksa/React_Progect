@@ -9,7 +9,6 @@ import { selectChats, selectChatsLength, selectFerstChatId } from "../../store/c
 
 import "./style.css";
 
-export const ChatItem = ({ item }) => {
   const { itemId } = useParams();
   const ferstChatId = useSelector(selectFerstChatId);
   const chatsLength = useSelector(selectChatsLength);
