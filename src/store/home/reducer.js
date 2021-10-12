@@ -1,10 +1,15 @@
-import { CHANGE_STATUS, HANDEL_LOGIN } from "./actions";
+import { REQUEST_STATUS } from "../../components/utils/constans";
+import { CHANGE_STATUS, ERROR_LOGIN, HANDEL_LOGIN } from "./actions";
 
 const initialState = {
   email: null,
   pass: null,
   authed: false,
   setAuthed: false,
+  request: {
+    error: null,
+    status: REQUEST_STATUS.IDLE,
+  },
 };
 
 export const homeReducer = (state = initialState, { type, payload }) => {
@@ -22,6 +27,15 @@ export const homeReducer = (state = initialState, { type, payload }) => {
         authed: payload.authed,
         setAuthed: payload.setAuthed
       };
+    }
+    case ERROR_LOGIN: {
+      return {
+        ...state,
+        request: {
+          error: payload,
+          status: REQUEST_STATUS.FAILURE,
+        }
+      }
     }
     default: 
     return state

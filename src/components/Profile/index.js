@@ -21,19 +21,12 @@ export const Profile = ({ theme }) => {
   const checkBox = useSelector(selectProfileCheckBox);
   const dispatchBox = useDispatch();
   const dispatch = useDispatch();
-  //const [error, setError] = useState("");
 
   const onChange = () => {
     dispatchBox(checkBoxOff);
   };
 
-  const handleLogout = async () => {
-    /* try {
-      await signOut();
-    } catch (e) {
-      console.log(e);
-      //TODO setError();
-    } */
+  const handleLogout = () => {
     dispatch(onLogout);
   };
 

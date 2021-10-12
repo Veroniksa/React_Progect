@@ -1,4 +1,4 @@
-import { onValue, ref, set } from "@firebase/database";
+import { onValue, ref, remove, set, update } from "@firebase/database";
 import { db } from "../../services/firebase";
 
 export const ADD_CHAT = "CHATS::ADD_CHAT";
@@ -36,5 +36,21 @@ export const addChatFb = (name) => () => {
   set(itemsDbRef, {
     id: newId,
     name,
+  });
+};
+
+export const deleteChats = () => (dispatch) => {
+  const itemsDbRef = ref(db, "items");
+  onValue(itemsDbRef, (snapshot) => {
+    const data = snapshot.val();
+    dispatch(deleteChat(Object.values(data || {})));
+  });
+};
+
+export const deleteChatFb = (id) => () => {
+  const itemsDbRef = ref(db, `items/${id}`);
+
+  remove(itemsDbRef, {
+    id,
   });
 };

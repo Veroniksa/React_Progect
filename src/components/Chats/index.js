@@ -12,6 +12,7 @@ import { ChartList } from "../ChstList";
 import { initChats } from "../../store/chats/actions";
 import { addMessageFb, initMessages } from "../../store/messages/actions";
 import { selectIfChatExists } from "../../store/chats/selectors";
+import { remove } from "@firebase/database";
 
 function Chats() {
   const { itemId } = useParams();
@@ -32,6 +33,9 @@ function Chats() {
   const sendMessage = useCallback(
     (text, author) => {
       dispatch(addMessageFb(text, author, itemId));
+      if (itemId == null) {
+        remove(addMessageFb());
+      }
     },
     [itemId]
   );

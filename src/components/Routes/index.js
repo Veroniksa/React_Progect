@@ -12,9 +12,12 @@ import { useEffect, useState } from "react";
 import { PublicRoute } from "../PublicRoute";
 import { onAuthStateChanged } from "@firebase/auth";
 import { auth, login, signUp } from "../../services/firebase";
+import { handleLoginFb } from "../../store/home/actions";
+import { useDispatch } from "react-redux";
 
 export const Routes = () => {
   const [authed, setAuthed] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     //Подптска на объект auth за которым необх. следить
@@ -34,13 +37,14 @@ export const Routes = () => {
   }, []);
 
   const handleLogin = async (email, pass) => {
-    try {
+/*     try {
       await login(email, pass);
       //setAuthed(true);
     } catch (e) {
       console.log(e);
       //setError()
-    }
+    } */
+    dispatch(handleLoginFb(email, pass));
     //dispatch(userLogin(email, pass))
   };
 

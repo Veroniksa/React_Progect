@@ -40,23 +40,12 @@ export const onLogout = (user) => {
 };
 
 
-/* export const onAuthFb = onAuthStateChanged(auth, (user) => (dispatch) => {
-    dispatch(onAuth);
-    console.log(user);
-      if (user) {
-        setAuthed(true);
-      } else {
-        setAuthed(false);
-      }
-}); */
-
 export const userChange = () => (dispatch) => {
   const userDbRef = ref(db, "user");
   onValue(userDbRef, (snapshot) => {
     const data = snapshot.val();
     console.log("-----------", data);
     dispatch(onAuth(Object.values(data.username || "")));
-    //setName(data?.username || '');
   });
 };
 

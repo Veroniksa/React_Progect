@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { deleteChat } from "../../store/chats/actions";
-import { selectChatsLength, selectFerstChatId } from "../../store/chats/selectors";
+import {
+  deleteChat,
+  deleteChatFb,
+  deleteChats,
+} from "../../store/chats/actions";
+import {
+  selectChatsLength,
+  selectFerstChatId,
+} from "../../store/chats/selectors";
 
 import "./style.css";
 import { ChatItemView } from "./ChatItenView";
-
+import { deleteMessageFb } from "../../store/messages/actions";
 
 export const ChatItemContainer = ({ item }) => {
   const { itemId } = useParams();
@@ -17,8 +24,13 @@ export const ChatItemContainer = ({ item }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(deleteChats());
+  }, []);
+
   const handelDelete = () => {
-    dispatch(deleteChat(item.id));
+    dispatch(deleteChatFb(item.id));
+    dispatch(deleteMessageFb(itemId));
 
     if (itemId !== item.id) {
       return;
@@ -31,6 +43,5 @@ export const ChatItemContainer = ({ item }) => {
     }
   };
 
-
-  return <ChatItemView name={item.name} id={item.id} onDelete={handelDelete} />
+  return <ChatItemView name={item.name} id={item.id} onDelete={handelDelete} />;
 };

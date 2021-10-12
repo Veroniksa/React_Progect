@@ -28,7 +28,6 @@ export const ProfileForm = () => {
 
   //когда snapshot пуст = null
 
-
   useEffect(() => {
     /* const userDbRef = ref(db, "user");
     onValue(userDbRef, (snapshot) => {
@@ -37,7 +36,6 @@ export const ProfileForm = () => {
       setName(data?.username || '');
     }); */
     dispatch(userChange(name));
-    
   }, []);
 
   const handelSubmit = (e) => {
@@ -56,7 +54,6 @@ export const ProfileForm = () => {
         <input type="text" value={value} onChange={handelChange} />
         <button>Submit</button>
       </form>
-
     </>
   );
 };

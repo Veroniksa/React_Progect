@@ -6,7 +6,6 @@ import { selectChats } from "../../store/chats/selectors";
 import { FormAddChat } from "../FormAddChat";
 
 export const ChartList = ({ itemId }) => {
-  //const items = useSelector(selectChats);
   const items = useSelector(selectChats);
 
   return (

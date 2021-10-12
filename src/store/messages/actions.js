@@ -1,4 +1,4 @@
-import { onValue, ref, set } from "@firebase/database";
+import { onValue, ref, remove, set } from "@firebase/database";
 import { AUTHORS } from "../../components/utils/constans";
 import { db } from "../../services/firebase";
 
@@ -57,4 +57,12 @@ export const addMessageFb = (text, author, itemId) => (dispatch) => {
     id: newId,
   });
   //TODO risposta di bot
+};
+
+export const deleteMessageFb = (itemId) => () => {
+  const itemsDbRef = ref(db, `messagesList/${itemId}`);
+
+  remove(itemsDbRef, {
+    itemId,
+  });
 };
