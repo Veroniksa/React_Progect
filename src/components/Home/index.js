@@ -1,3 +1,4 @@
+import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 
 export const Home = ({ onLogin, onSignUp }) => {
@@ -36,13 +37,15 @@ export const Home = ({ onLogin, onSignUp }) => {
   };
 
   return (
-    <>
+    <div className="HomeForm">
       <h3>{!!onLogin ? "Login" : "SignUp"}</h3>
       <form onSubmit={handelSubmit}>
-        <input type="text" value={login} onChange={handelLoginChange}></input>
-        <input type="password" value={pass} onChange={handelPassChange}></input>
-        <input type="submit" />
+        <TextField label="Email" type="text" value={login} onChange={handelLoginChange}></TextField>
+        <br/>
+        <TextField label="Password" type="password" value={pass} onChange={handelPassChange}></TextField>
+        <br/>
+        <Button className="HomeBtn" variant="outlined" type="submit">Submit</Button>
       </form>
-    </>
+    </div>
   );
 };

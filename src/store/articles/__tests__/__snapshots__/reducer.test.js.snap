@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`articles reducer hade case, returns state and request 1`] = `
+Object {
+  "request": Object {
+    "errror": null,
+    "status": "pending",
+  },
+  "state": null,
+}
+`;

@@ -35,7 +35,6 @@ export const Profile = ({ theme }) => {
       <ProfileTop theme={theme} />
       <ProfileForm />
       <br/>
-      <hr/>
       <Button variant="outlined" onClick={handleLogout}>Logaut</Button>
 
 {/*       <Checkbox value={checkBox} onChange={onChange}></Checkbox>

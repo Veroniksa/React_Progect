@@ -29,20 +29,22 @@ describe("articles actions", () => {
       await getArticles()(mockDispatch);
 
       expect(fetchMock).toHaveBeenCalledWith(URL_PUBLIC);
-    })
+    });
 
     it("calls dispath with getArticles success with result from fetch", async () => {
-        const mockDispatch = jest.fn();
-        const result = ['articles'];
+      const mockDispatch = jest.fn();
+      const result = ["articles"];
 
-        fetchMock.mockOnce(
-          JSON.stringify(result)
-        );
-  
-        await getArticles()(mockDispatch);
-  
-        expect(mockDispatch).toHaveBeenCalledTimes(2);
-        expect(mockDispatch).toHaveBeenLastCalledWith(GetArticlesSuccess(result));
-      })
+      fetchMock.mockOnce(JSON.stringify(result));
+
+      await getArticles()(mockDispatch);
+
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockDispatch).toHaveBeenLastCalledWith(GetArticlesSuccess(result));
+    });
   });
+
+  /* describe("tests errors", () => {
+    it("calls console.log when happines error", () => {});
+  }); */
 });

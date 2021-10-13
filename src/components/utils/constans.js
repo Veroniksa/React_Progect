@@ -7,7 +7,7 @@ export const URL_PUBLIC = "https://api.spaceflightnewsapi.net/v3/articles";
 
 export const REQUEST_STATUS = {
   IDLE: "idle",
-  PENDING: "penging",
+  PENDING: "pending",
   SUCCESS: "success",
   FAILURE: "failure",
 };

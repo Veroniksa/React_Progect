@@ -55,8 +55,7 @@ export const ProfileForm = () => {
         type="text" 
         value={value} 
         onChange={handelChange}
-        label="Write your name"
-        autofocus />
+        label="Write your name" />
         <Button variant="outlined" disabled={!value}>Submit</Button>
       </form>
     </>

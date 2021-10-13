@@ -1,17 +1,17 @@
-import React from "react"
+import React from "react";
 import {render, fireEvent} from '@testing-library/react';
-import ButtonTop from "../index";
+import {ButtonTop} from '..';
 
 describe('Button', () => {
     it.todo("matches snapshot");
 
-/*     it('calls when cildren', () => {
-        const hendelClick = jest.fn();
-        const component = render(<ButtonTop onClick={hendelClick}><span>Hello Button</span></ButtonTop>)
-
-        const clicked = component.getByRole('button');
-        fireEvent(clicked, new MouseEvent('click', {bubbles: true}));
-
-        expect(hendelClick).toHaveCalledTimes(1)
-    }) */
+    it('calls when clicked', () => {
+        const handleClick = jest.fn();
+        const component = render(<ButtonTop onClick={handleClick}><span>Hello Button</span></ButtonTop>);
+    
+        const clickable = component.getByRole('button');
+        fireEvent(clickable, new MouseEvent('click', { bubbles: true }));
+    
+        expect(handleClick).toHaveBeenCalledTimes(1);
+      });
 })

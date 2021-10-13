@@ -25,7 +25,7 @@ export const ProfileTop = ({onLogaut}) => {
       <hr/>
       {(!{name} && <h3>Welcome, {name}</h3>)}
       {/* <button onClick={handelClick}>Logaut</button> */}
-      {showName && <div>{name}</div>}
+      {<div>{name}</div>}
     </>
   );
 };
