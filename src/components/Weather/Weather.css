@@ -1,0 +1,9 @@
+.Weather{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Weather h1{
+    color: blueviolet
+}

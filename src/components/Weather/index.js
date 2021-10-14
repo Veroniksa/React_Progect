@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeather } from "../../store/weather/actions";
 import { selectWeather, selectWeatherError, selectWeatherLoading } from "../../store/weather/selector";
+import "./Weather.css";
 
 export const Weather = () => {
   const temps = useSelector(selectWeather);
@@ -19,7 +20,7 @@ export const Weather = () => {
   };
 
   return (
-    <div>
+    <div className="Weather">
       <h1>Weather in the Rome</h1>
       {loading && <LinearProgress />}
       {error ? (

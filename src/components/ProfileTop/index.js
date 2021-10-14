@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 
 import {
@@ -9,8 +9,9 @@ import { ThemeContext } from "../utils/ThemeContext";
 
 export const ProfileTop = ({onLogaut}) => {
   const showName = useSelector(selectProfileShowName);
-  const name = useSelector(selectProfileName);
+  //const name = useSelector(selectProfileName);
   const theme = useContext(ThemeContext);
+  const [name, setName] = useState("");
 
   /* const handelClick = () => {
     onLogaut();
@@ -19,7 +20,7 @@ export const ProfileTop = ({onLogaut}) => {
 
   return (
     <>
-      <h2 style={{ color: theme.theme === "light" ? "red" : "blue" }}>
+      <h2 style={{ color: theme.theme === "light" ? "blueviolet" : "blue" }}>
         This is page of profile
       </h2>
       <hr/>

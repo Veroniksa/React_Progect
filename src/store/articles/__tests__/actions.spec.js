@@ -5,6 +5,7 @@ import {
   GET_ARTICLES_PENDING,
   getArticles,
   GetArticlesSuccess,
+  getArticlesFailure,
 } from "../actions";
 
 describe("articles actions", () => {
@@ -35,7 +36,8 @@ describe("articles actions", () => {
       const mockDispatch = jest.fn();
       const result = ["articles"];
 
-      fetchMock.mockOnce(JSON.stringify(result));
+      fetchMock.mockOnce(
+        JSON.stringify(result));
 
       await getArticles()(mockDispatch);
 
@@ -44,7 +46,17 @@ describe("articles actions", () => {
     });
   });
 
-  /* describe("tests errors", () => {
-    it("calls console.log when happines error", () => {});
-  }); */
-});
+/*   describe("tests errors",  () => {
+    it("calls console.log when happines error", async () => {
+      const mockDispatch = jest.fn();
+      const e = ["error"];
+
+      fetchMock.mockOnce(
+        JSON.stringify(e));
+
+        await getArticlesFailure(mockDispatch);
+
+    expect(mockDispatch).toThrow(e)
+  })
+}) */
+})

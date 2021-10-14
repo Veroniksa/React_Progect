@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
 
 import { ThemeContext } from "../utils/ThemeContext";
-import { selectProfileCheckBox } from "../../store/profile/selectors";
+//import { selectProfileCheckBox } from "../../store/profile/selectors";
 import { checkBoxOff, onLogout } from "../../store/profile/action";
 import { ProfileTop } from "../ProfileTop";
 import { ProfileForm } from "../ProfileForm";
@@ -18,13 +18,13 @@ const withContext = (Component) => {
 };
 
 export const Profile = ({ theme }) => {
-  const checkBox = useSelector(selectProfileCheckBox);
-  const dispatchBox = useDispatch();
+/*   const checkBox = useSelector(selectProfileCheckBox);
+  const dispatchBox = useDispatch(); */
   const dispatch = useDispatch();
 
-  const onChange = () => {
+/*   const onChange = () => {
     dispatchBox(checkBoxOff);
-  };
+  }; */
 
   const handleLogout = () => {
     dispatch(onLogout);

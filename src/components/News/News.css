@@ -1,0 +1,9 @@
+.News{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.News h2{
+    color: blueviolet
+}

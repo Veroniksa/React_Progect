@@ -5,6 +5,7 @@ import { CircularProgress } from "@material-ui/core";
 import { getArticles } from "../../store/articles/actions";
 import { selectArticles, selectArticlesError, selectArticlesLoading } from "../../store/articles/selectors";
 
+import "./News.css";
 export const News = () => {
   
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export const News = () => {
   }, []);
 
   return (
-    <div>
+    <div className="News">
       <h2>News</h2>
       {error ? (
         <>

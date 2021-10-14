@@ -4,7 +4,7 @@ const initialState = {
     showName: false,
     checkBox: false,
     name: "default",
-    user: '',
+    user: "",
 };
 
 export const profileReducer = (state = initialState, {type, payload}) => { //{type, payload} деструктаризация action
